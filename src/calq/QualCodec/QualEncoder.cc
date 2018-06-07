@@ -152,16 +152,17 @@ size_t QualEncoder::writeBlock(CQFile *cqFile) {
     // Write mapped quantizer indices
     std::string mqiString("");
     int pos = 0;
+    int resolution;
     Quantizer currentQuantizer;
     for (auto const &mappedQuantizerIndex : mappedQuantizerIndices_) {
         mqiString += std::to_string(mappedQuantizerIndex);
-        if (mappedQuantizerIndex < quantizers_.size()) {
-            currentQuantizer = quantizers_.at(mappedQuantizerIndex);
-            CALQ_LOG("Position, Quantization resolution: %d,%d", posOffset_ + pos, currentQuantizer.resolution());
+        if (mappedQuantizerIndex > 0 && mappedQuantizerIndex <= quantizers_.size()) {
+            currentQuantizer = quantizers_.at(mappedQuantizerIndex - 1);
+            resolution = currentQuantizer.resolution();
+        } else {
+            resolution = 1;
         }
-        else {
-            CALQ_LOG("ERROR: Quantizer index: %d >= number of quantizers: %d!", mappedQuantizerIndex, quantizers_.size());
-        }
+        CALQ_LOG("Position, Quantization resolution: %d,%d", posOffset_ + pos, resolution);
         pos++;
     }
     unsigned char *mqi = (unsigned char *)mqiString.c_str();
