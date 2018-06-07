@@ -21,6 +21,7 @@ class Quantizer {
     int valueToIndex(const int &value) const;
     int indexToReconstructionValue(const int &index) const;
     int valueToReconstructionValue(const int &value) const;
+    int resolution() const;
 
     const std::map<int, int> & inverseLut(void) const;
 

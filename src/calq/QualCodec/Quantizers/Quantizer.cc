@@ -44,6 +44,10 @@ const std::map<int, int> & Quantizer::inverseLut(void) const {
     return inverseLut_;
 }
 
+int Quantizer::resolution(void) const {
+    return inverseLut_.size();
+}
+
 void Quantizer::print(void) const {
     std::cout << "LUT:" << std::endl;
     for (auto const &lutElem : lut_) {
