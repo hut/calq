@@ -162,7 +162,7 @@ size_t QualEncoder::writeBlock(CQFile *cqFile) {
         } else {
             resolution = 1;
         }
-        CALQ_LOG("Position, Quantization resolution: %d,%d", posOffset_ + pos, resolution);
+        CALQ_LOG("qntz: %d,%d", posOffset_ + pos, resolution);
         pos++;
     }
     unsigned char *mqi = (unsigned char *)mqiString.c_str();
